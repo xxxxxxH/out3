@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BasicModel</string>
+    <string name="facebook_app_id">470679854219500</string>
+    <string name="scan_qrcode">Scan QR code</string>
 </resources>

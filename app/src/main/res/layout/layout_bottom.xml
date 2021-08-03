@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_alignParentBottom="true">
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/scan"
+            style="@style/bottom_tv"
+            android:text="scan"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/create"
+            style="@style/bottom_tv"
+            android:text="create"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:id="@+id/history"
+            style="@style/bottom_tv"
+            android:text="history"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+</LinearLayout>

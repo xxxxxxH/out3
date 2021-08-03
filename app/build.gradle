@@ -34,5 +34,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'net.qr.code.scan.sdk:QRZingEngine:1.4.4'
+
+//    implementation 'net.qr.code.scan.sdk:QRZingEngine:1.4.4'
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+    implementation 'com.android.installreferrer:installreferrer:2.2'
+
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'com.tencent:mmkv-static:1.2.8'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
 }
