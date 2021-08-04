@@ -1,6 +1,7 @@
 package net.basicmodel
 
 import android.Manifest
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
+import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.layout_bottom.*
 import net.fragment.CreateFragment
 import net.fragment.HistoryFragment
@@ -27,10 +29,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main)
         requestPermissions()
         showPosition(0)
         initView()
+        MMKV.initialize(this)
     }
 
     fun requestPermissions() {
