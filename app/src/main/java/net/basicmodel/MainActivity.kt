@@ -24,12 +24,13 @@ class MainActivity : AppCompatActivity() {
 
     private val permissions = arrayOf(
         Manifest.permission.CAMERA,
-        Manifest.permission.READ_EXTERNAL_STORAGE
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_main)
         requestPermissions()
         showPosition(0)
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun requestPermissions() {
-        if (checkPermission(permissions[0]) && checkPermission(permissions[1])) {
+        if (checkPermission(permissions[0]) && checkPermission(permissions[1]) && checkPermission(permissions[2])) {
 
         } else {
             ActivityCompat.requestPermissions(this, permissions, 321)

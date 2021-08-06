@@ -5,21 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/createEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="48dp"
+        android:background="@drawable/et_bg"
+        android:hint="Please Input"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
     <ImageView
         android:id="@+id/createImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@mipmap/create" />
+        android:scaleType="centerCrop" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/createBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/createImg"
-        android:layout_centerHorizontal="true"
-        android:padding="8dp"
-        android:text="create"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="48dp"
+        android:background="@color/black"
+        android:gravity="center"
+        android:text="create and save"
         android:textAllCaps="true"
-        android:textSize="40sp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         android:textStyle="bold|italic" />
+
 </RelativeLayout>

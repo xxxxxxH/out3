@@ -1,13 +1,19 @@
 package net.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.layout_fragment_create.*
 import net.basicmodel.R
 import net.utils.EncodingUtils
+import net.utils.ImgUtils
 import net.utils.ScreenUtils
 
 /**
@@ -18,6 +24,21 @@ import net.utils.ScreenUtils
  * Desc :
  */
 class CreateFragment : Fragment() {
+
+    val handler: Handler = @SuppressLint("HandlerLeak")
+    object : Handler() {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg.what) {
+                1 -> {
+                    Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show()
+                }
+                -1 -> {
+                    Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,22 +54,32 @@ class CreateFragment : Fragment() {
     }
 
     private fun initView() {
-        val p = createImg.layoutParams
-        p.width = ScreenUtils.getScreenSize(activity)[0] * 3 / 4
-        p.height = ScreenUtils.getScreenSize(activity)[1] / 2
-        createImg.layoutParams = p
-        createRoot.invalidate()
-        createRoot.setOnClickListener {
-            val bitmap = EncodingUtils.createQRCode(
-                "a",
-                ScreenUtils.getScreenSize(activity)[0] * 3 / 4,
-                ScreenUtils.getScreenSize(activity)[1] / 2
-            )
-            val p = createImg.layoutParams
-            p.width = ScreenUtils.getScreenSize(activity)[0] * 3 / 4
-            p.height = ScreenUtils.getScreenSize(activity)[1] / 2
-            createImg.layoutParams = p
+        createBtn.setOnClickListener {
+            if (TextUtils.isEmpty(createEt.text.toString())) {
+                Toast.makeText(activity, "please input something", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val width = ScreenUtils.getScreenSize(activity)[1]
+            val height = ScreenUtils.getScreenSize(activity)[0]
+            val bitmap =
+                EncodingUtils.createQRCode(createEt.text.toString(), height / 3, height / 3)
+                    ?: return@setOnClickListener
             createImg.setImageBitmap(bitmap)
+            Thread(Runnable {
+                val result: Boolean = ImgUtils.saveImageToGallery(activity, bitmap)
+                if (result) {
+                    val msg = Message()
+                    msg.what = 1
+                    handler.sendMessage(msg)
+                } else {
+                    val msg = Message()
+                    msg.what = -1
+                    handler.sendMessage(msg)
+                }
+
+            }).start()
+
         }
     }
 }
