@@ -12,8 +12,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.zxing.integration.android.IntentIntegrator
+import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.layout_fragment_sacn.*
+import net.HistoryEntity
 import net.basicmodel.R
+import net.utils.FormatUtils
+import net.utils.MMKVUtils
+import java.util.*
 
 
 /**
@@ -24,7 +29,6 @@ import net.basicmodel.R
  * Desc :
  */
 class ScanFragment : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +69,13 @@ class ScanFragment : Fragment() {
             Toast.makeText(activity, "no data", Toast.LENGTH_SHORT).show()
         else {
             resultTv.text = result.contents
+            val entity = HistoryEntity()
+            entity.type = "doScan"
+            entity.content = result.contents
+            val time = FormatUtils.formatDate(Date())
+            entity.time = time
+            MMKVUtils.saveKeys("time",time)
+            MMKV.defaultMMKV()?.encode(time,entity)
         }
     }
 
